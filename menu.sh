@@ -25,6 +25,7 @@ echo -e " [\e[36m•18\e[0m] Restart Trojan-ws "
 echo -e " [\e[36m•19\e[0m] Restart Vless gRPC "
 echo -e " [\e[36m•20\e[0m] Restart Nginx "
 echo -e " [\e[36m•21\e[0m] Clear Log "
+echo -e " [\e[36m•22\e[0m] FIX RAM "
 echo -e ""
 echo -e " [\e[31m•0\e[0m] \e[31mBACK TO MENU\033[0m"
 echo -e   ""
@@ -56,7 +57,9 @@ case $opt in
 19) clear ; systemctl restart xray@vlgrpc ;;
 20) clear ; systemctl restart nginx ;;
 21) clear ; cat /dev/null > /var/log/xray/acces.log;cat /dev/null > /var/log/xray/access.log;cat /dev/null > /var/log/xray/access2.log;cat /dev/null > /var/log/xray/error.log;cat /dev/null > /var/log/xray/trojan.log;cat /dev/null > /var/log/xray/trojanws.log;cat /dev/null > /var/log/xray/vlgrpc.log ;;
+22) clear ; systemctl stop nginx;systemctl stop xray@trojan;systemctl stop xray@vmess;systemctl stop xray@vless;systemctl stop xray@trojanws;systemctl stop xray@vlgrpc;systemctl daemon-reload;systemctl restart nginx;systemctl restart xray@trojan;systemctl restart xray@vmess;systemctl restart xray@vless;systemctl restart xray@trojanws;systemctl restart xray@vlgrpc;;
 0) clear ; menu ;;
 x) exit ;;
 *) echo -e "" ; echo "Press any key to back on menu" ; menu ;;
 esac
+
