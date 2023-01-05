@@ -58,10 +58,10 @@ if [[ -z "$akun" ]]; then
 akun="tidakada"
 fi
 echo -n > /tmp/ipvmess.txt
-data2=( `cat /var/log/xray/access.log | grep $akun | tail -n 100 | cut -d " " -f 3 | cut -d ":" -f 1 | sort | uniq`);
+data2=( `cat /var/log/xray/vmess.log | grep $akun | tail -n 100 | cut -d " " -f 3 | cut -d ":" -f 1 | sort | uniq`);
 for ip in "${data2[@]}"
 do
-jum=$(cat /var/log/xray/access.log | grep -w $akun | awk '{print $3}' | tail -n 1000 | cut -d " " -f 3 | cut -d ":" -f 1 | grep -w $ip | sort | uniq | sed '/tcp/d' | sed '/udp/d')
+jum=$(cat /var/log/xray/vmess.log | grep -w $akun | awk '{print $3}' | tail -n 1000 | cut -d " " -f 3 | cut -d ":" -f 1 | grep -w $ip | sort | uniq | sed '/tcp/d' | sed '/udp/d')
 if [[ "$jum" = "$ip" ]]; then
 echo "$jum" >> /tmp/ipvmess.txt
 else
