@@ -56,7 +56,7 @@ case $opt in
 18) clear ; systemctl restart xray@trojanws ;;
 19) clear ; systemctl restart xray@vlgrpc ;;
 20) clear ; systemctl restart nginx ;;
-21) clear ; cat /dev/null > /var/log/xray/vmess.log;cat /dev/null > /var/log/xray/vless.log;cat /dev/null > /var/log/xray/trojan.log;cat /dev/null > /var/log/xray/error.log;cat /dev/null > /var/log/xray/trojan.log;cat /dev/null > /var/log/xray/trojanws.log;cat /dev/null > /var/log/xray/ssws.log;cat /dev/null > /var/log/xray/vlgrpc.log ;;
+21) clear ; cat /dev/null > /var/log/xray/vmess.log;cat /dev/null > /var/log/xray/vless.log;cat /dev/null > /var/log/xray/trojan.log;cat /dev/null > /var/log/xray/trojan.log;cat /dev/null > /var/log/xray/trojanws.log;cat /dev/null > /var/log/xray/ssws.log;cat /dev/null > /var/log/xray/vlgrpc.log ;;
 22) clear ; systemctl stop nginx;systemctl stop xray@trojan;systemctl stop xray@vmess;systemctl stop xray@vless;systemctl stop xray@trojanws;systemctl stop xray@vlgrpc;systemctl daemon-reload;systemctl restart nginx;systemctl restart xray@trojan;systemctl restart xray@vmess;systemctl restart xray@vless;systemctl restart xray@trojanws;systemctl restart xray@vlgrpc;;
 0) clear ; menu ;;
 x) exit ;;
