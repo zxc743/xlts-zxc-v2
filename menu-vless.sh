@@ -97,10 +97,10 @@ if [[ -z "$akun" ]]; then
 akun="tidakada"
 fi
 echo -n > /tmp/ipvless.txt
-data2=( `cat /var/log/xray/access2.log | grep $akun | tail -n 100 | cut -d " " -f 3 | cut -d ":" -f 1 | sort | uniq`);
+data2=( `cat /var/log/xray/vless.log | grep $akun | tail -n 100 | cut -d " " -f 3 | cut -d ":" -f 1 | sort | uniq`);
 for ip in "${data2[@]}"
 do
-jum=$(cat /var/log/xray/access2.log | grep -w $akun | awk '{print $3}' | tail -n 1000 | cut -d " " -f 3 | cut -d ":" -f 1 | grep -w $ip | sort | uniq | sed '/tcp/d' | sed '/udp/d')
+jum=$(cat /var/log/xray/vless.log | grep -w $akun | awk '{print $3}' | tail -n 1000 | cut -d " " -f 3 | cut -d ":" -f 1 | grep -w $ip | sort | uniq | sed '/tcp/d' | sed '/udp/d')
 if [[ "$jum" = "$ip" ]]; then
 echo "$jum" >> /tmp/ipvless.txt
 else
@@ -149,7 +149,7 @@ exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vless.json
 vlesslink1="vless://${uuid}@${domain}:443/?type=ws&encryption=none&host=ISI_BUG_DISINI&path=/vless&security=tls&sni=ISI_BUG_DISINI#${user}"
-vlesslink2="vless://${uuid}@ISI_BUG_DISINI:8080?path=/vless&security=none&encryption=none&host=${domain}&type=ws&sni=${domain}#${user}"
+vlesslink2="vless://${uuid}@ISI_BUG_DISINI:80?path=/vless&security=none&encryption=none&host=${domain}&type=ws&sni=${domain}#${user}"
 systemctl restart xray@vless
 clear
 echo -e ""
@@ -157,11 +157,11 @@ echo -e "==========-XRAY/VLESS-=========="
 echo -e "Remarks        : ${user}"
 echo -e "Domain         : ${domain}"
 echo -e "port TLS       : 443"
-echo -e "port none TLS  : 8080"
+echo -e "port none TLS  : 80"
 echo -e "id             : ${uuid}"
 echo -e "Encryption     : none"
 echo -e "network        : ws"
-echo -e "path           : /vless or /bebas"
+echo -e "path           : /vless"
 echo -e "================================="
 echo -e "link TLS       : ${vlesslink1}"
 echo -e "================================="
